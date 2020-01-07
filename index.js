@@ -23,8 +23,10 @@ function getModuleLocator(module) {
 
   const moduleLocator = pnp.findPackageLocator(moduleLocation);
 
-  if (!moduleLocator)
+  if (!moduleLocator && !~moduleLocation.indexOf('webpack')) {
+    console.error('Module not found:', moduleLocation);
     throw new Error(`the specified module doesn't seem to be part of the dependency tree`);
+  }
 
   return moduleLocator;
 }
