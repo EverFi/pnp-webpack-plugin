@@ -1,5 +1,4 @@
 const path = require(`path`);
-const {resolveModuleName} = require(`ts-pnp`);
 
 let pnp;
 
@@ -141,13 +140,3 @@ module.exports.bind = (filter, module, dependency) => pnp ? {
 } : {
   apply: nothing,
 };
-
-module.exports.tsLoaderOptions = (options = {}) => pnp ? Object.assign({}, options, {
-  resolveModuleName: resolveModuleName,
-  resolveTypeReferenceDirective: resolveModuleName,
-}) : options;
-
-module.exports.forkTsCheckerOptions = (options = {}) => pnp ? Object.assign({}, options, {
-  resolveModuleNameModule: require.resolve(`./ts`),
-  resolveTypeReferenceDirectiveModule: require.resolve(`./ts`),
-}) : options;
